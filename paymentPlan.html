@@ -1,0 +1,101 @@
+<template>
+    <div if:true={showCalculator}>
+        <div class="header slds-page-header slds-page-header_record-home">
+            <div class="header-icon">
+                <lightning-icon icon-name="custom:custom41" alternative-text="EMI" size="medium"
+                    title="large size"></lightning-icon>
+                <div>
+                    <p class="slds-line-height_reset">EMI</p>   
+                    <h1 class="slds-page-header__title">Payment Plan</h1>
+                </div>
+            </div>
+
+
+            <div>
+                <lightning-button-group>
+                    <lightning-button label="Reset" onclick={handleReset}></lightning-button>
+                    <lightning-button label="Save" onclick={handleSave}></lightning-button>
+                </lightning-button-group>
+            </div>
+        </div>
+        <lightning-card>
+            <table style='box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'>
+                <thead>
+                    <th class="table-head non-editable">Price</th>
+                    <th class="table-head">GST (18%)</th>
+                    <th class="table-head">Total Billing Price</th>
+                    <th class="table-head">Monthly Installment</th>
+                </thead>
+                <tr class="table-row">
+                    <td class="table-data-input non-edit">
+                        <p>₹{totalTargetPrice}</p>
+                    </td>
+                    <td class="table-data-input non-edit">
+                        <p>₹{gstAddOn}</p>
+                    </td>
+                    <td class="table-data-input non-edit">
+                        <p>₹{totalBillingPrice}</p>
+
+                    </td>
+                    <td class="table-data-input">
+                        <p>₹{monthlyInstallment}</p>
+                    </td>
+                </tr>
+            </table>
+        </lightning-card>
+        <lightning-card>
+            <table style='box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'>
+                <thead>
+                    <th class="table-head">Advanced Payment</th>
+                    <th class="table-head">Principal Amount</th>
+                    <th class="table-head">Provided Rate of interest (%)</th>
+                    <th class="table-head">Tenure (in months)</th>
+                    <th class="table-head">Grace Period (in months)</th>
+                    <th class="table-head">Moratorium Period (in months)</th>
+                    <th class="table-head">Net Sales Value</th>
+                </thead>
+                <tr class="table-row">
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="number" formatter="currency" step=".01"
+                            value={advancedAmt} onchange={handleAdvancedChange}></lightning-input>
+                        <p if:true={errorMessage} class="error-message">{errorMessage}</p>
+
+                    </td>
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="number" formatter="currency" step=".01"
+                            value={principalAmount} onchange={handlePrincipalAmtChange}></lightning-input>
+                    </td>
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="decimal" value={rate}
+                            onchange={handleRateChange}></lightning-input>
+                    </td>
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="decimal" onchange={handleTenureChange} name="tenure"
+                            maxlength="2"></lightning-input>
+                    </td>
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="decimal" onchange={handleGraceChange} name="grace"
+                            maxlength="2"></lightning-input>
+                    </td>
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="decimal" onchange={handleMoratoriumChange}
+                            name="moratorium" maxlength="2"></lightning-input>
+                    </td>
+
+                    <td class="table-data-input">
+                        <lightning-input class="custom-input" type="number" formatter="currency" step=".01"
+                            value={netSalesValue} onchange={handleNetValueChange}></lightning-input>
+                    </td>
+                </tr>
+            </table>
+        </lightning-card>
+
+        <lightning-card>
+            <lightning-datatable key-field="id" data={data} columns={columns} hide-checkbox-column="true">
+            </lightning-datatable>
+        </lightning-card>
+    </div>
+    <div if:false={showCalculator}>
+        <h1 style="text-align:center; margin:auto; color:red;"><b>YOU DON'T HAVE ACCESS TO EMI CALCULATOR</b></h1>
+    </div>
+</template>
