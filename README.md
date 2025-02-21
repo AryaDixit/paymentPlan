@@ -145,4 +145,4 @@ The component uses CSS to style the user interface. Key elements and their styli
 - **Accessibility:** Ensure the component is accessible to users with disabilities by following accessibility best practices.
 - **Performance:** Optimize the component's performance, especially when dealing with large datasets or complex calculations.
 
-![alt text](image.png)
+![alt text](PaymentPlanClip-ezgif.com-video-to-gif-converter.gif)
